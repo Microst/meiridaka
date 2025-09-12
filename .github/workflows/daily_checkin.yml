@@ -1,4 +1,4 @@
-name: Daily Checkin Task
+name: Daily meiri
 
 on:
   schedule:
