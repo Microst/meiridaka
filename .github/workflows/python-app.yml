@@ -3,13 +3,15 @@ name: Daily Checkin Task
 on:
   schedule:
     # 设置定时任务，每天 UTC 时间 16:00 (即北京时间第二天 00:00) 运行
-    # 注意：cron 语法是 "分 时 日 月 周"
     - cron: '0 16 * * *'
   workflow_dispatch: # 允许手动触发
 
 jobs:
   run-checkin:
     runs-on: ubuntu-latest
+    # 明确设置时区（可选，GitHub Actions默认使用UTC）
+    env:
+      TZ: UTC
 
     steps:
       - name: Checkout code
@@ -28,7 +30,29 @@ jobs:
           # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run check-in script
-        run: python main.py
+        run: |
+          # 添加错误处理
+          if [ -z "${{ secrets.COCO_AUTH_TOKEN }}" ]; then
+            echo "COCO_AUTH_TOKEN is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.ZHSL_AUTH_TOKEN }}" ]; then
+            echo "ZHSL_AUTH_TOKEN is not set"
+            exit 1
+          fi
+          python main.py
         env:
           COCO_AUTH_TOKEN: ${{ secrets.COCO_AUTH_TOKEN }}
           ZHSL_AUTH_TOKEN: ${{ secrets.ZHSL_AUTH_TOKEN }}
+      
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Daily Checkin Failed',
+              body: 'The daily checkin task failed. Please check the workflow run.'
+            })
