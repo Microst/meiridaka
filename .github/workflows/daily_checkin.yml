@@ -1,15 +1,15 @@
-name: Daily meiri
+name: Daily Checkin Task
 
 on:
   schedule:
-    # 每天 UTC 时间 05:14 运行 (对应北京时间 13:14)
-    - cron: '14 5 * * *'
+    # 设置定时任务，每天 UTC 时间 05:30 (即北京时间 13:30) 运行
+    - cron: '30 5 * * *'
   workflow_dispatch: # 允许手动触发
 
 jobs:
   run-checkin:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,10 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install requests
-          # 如果有 requirements.txt，可以取消下面这行的注释
-          # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run check-in script
         run: python main.py
