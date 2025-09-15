@@ -3,7 +3,7 @@ name: Daily Checkin Task
 on:
   schedule:
     # 设置定时任务，每天 UTC 时间 05:30 (即北京时间 13:30) 运行
-    - cron: '30 5 * * *'
+    - cron: '55 5 * * *'
   workflow_dispatch: # 允许手动触发
 
 jobs:
