@@ -1,7 +1,7 @@
 import requests
 
 _0x3a2b = [
-    {"name": "我喜欢你", "namo": "9be4b894bfc35d3d98b48dce4d9a2656"},
+    {"name": "我喜欢你", "namo": "b36f77ef55c993ac6848134cceeb0064"},
     {"name": "枝两声", "namo": "0edfb14abd40d0e21edb1b9f7a68d850"},
     
     {"name": "和我在一起吧", "namo": "08d49590c20a11de4a02fc68a0a12f12"}
