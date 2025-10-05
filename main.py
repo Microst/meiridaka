@@ -4,7 +4,7 @@ _0x3a2b = [
     {"name": "我喜欢你", "namo": "b36f77ef55c993ac6848134cceeb0064"},
     {"name": "枝两声", "namo": "0edfb14abd40d0e21edb1b9f7a68d850"},
     
-    {"name": "和我在一起吧", "namo": "08d49590c20a11de4a02fc68a0a12f12"}
+    {"name": "和我在一起吧", "namo": "9020c997dea4d42d2cf1b70e39fd617b"}
 ]
 
 _0x5d7c = {
